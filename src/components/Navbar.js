@@ -1,17 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 import './Navbar.css';
 
 const Navbar = () => {
+    const { isDarkTheme } = useTheme();
+
     return (
-        <nav className="navbar">
+        <nav className={`navbar ${isDarkTheme ? 'dark' : 'light'}`}>
             <div className="nav-brand">
-                <Link to="/">TheMathGuy</Link>
+                <Link to="/">
+                    <img 
+                        src={isDarkTheme ? "/image.png" : "/math-light.png"} 
+                        alt="Logo" 
+                        className="nav-logo" 
+                    />
+                </Link>
             </div>
             <div className="nav-links">
-                <Link to="/levels">Math Levels</Link>
-                <Link to="/fields">Math Fields</Link>
-                <Link to="/login" className="login-btn">Login</Link>
+                <Link to="/courses">courses</Link>
+                <Link to="/help">help</Link>
+                <Link to="/about">about us</Link>
+                <Link to="/login" className="login-btn">login</Link>
             </div>
         </nav>
     );
