@@ -35,6 +35,18 @@
     font-weight: 400;
     margin-bottom: 1rem;
     letter-spacing: -1px;
+    position: relative;
+    display: inline-block;
+}
+
+.about-hero h1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 2px;
+    background: var(--text-color);
 }
 
 .about-hero .subtitle {
@@ -56,7 +68,19 @@
 .mission h2 {
     font-size: 2.5rem;
     font-weight: 400;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+}
+
+.mission h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 2px;
+    background: var(--text-color);
 }
 
 .mission p {
@@ -76,6 +100,18 @@
     font-weight: 400;
     text-align: center;
     margin-bottom: 4rem;
+    position: relative;
+    display: inline-block;
+}
+
+.team-section h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 2px;
+    background: var(--text-color);
 }
 
 .team-grid {
@@ -107,7 +143,19 @@
 .team-member h3 {
     font-size: 1.5rem;
     font-weight: 400;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.team-member h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 1px;
+    background: var(--text-color);
 }
 
 .team-member .role {
@@ -126,6 +174,18 @@
     font-weight: 400;
     text-align: center;
     margin-bottom: 4rem;
+    position: relative;
+    display: inline-block;
+}
+
+.values-section h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 2px;
+    background: var(--text-color);
 }
 
 .values-grid {
@@ -143,6 +203,18 @@
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.value-item h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 1px;
+    background: var(--text-color);
 }
 
 .value-item p {
