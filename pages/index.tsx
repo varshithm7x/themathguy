@@ -2,10 +2,20 @@ import TextPressure from '../components/TextPressure';
 
 function HomePage() {
   return (
-    <TextPressure 
-      text="Project Name" 
-      className="text-4xl font-bold" // adjust className as needed
-    />
+    <div style={{ position: 'relative', height: '300px' }}>
+      <TextPressure
+        text="Project Name"
+        flex={true}
+        alpha={false}
+        stroke={false}
+        width={true}
+        weight={true}
+        italic={true}
+        textColor="#000000" // Adjust color as needed
+        strokeColor="#ff0000"
+        minFontSize={36}
+      />
+    </div>
   );
 }
 
