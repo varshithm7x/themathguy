@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import './Homepage.css';
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
 
 const Homepage = () => {
     const { isDarkTheme } = useTheme();
@@ -8,6 +10,19 @@ const Homepage = () => {
     useEffect(() => {
         document.querySelector('.homepage').classList.add('loaded');
     }, []);
+
+    const handleGoogleSuccess = (credentialResponse) => {
+        const decoded = jwt_decode(credentialResponse.credential);
+        console.log(decoded);
+        // Handle user login with the decoded information
+        // You might want to store this in state or context
+        // And redirect the user or update UI accordingly
+    };
+    
+    const handleGoogleError = () => {
+        console.log('Google Login Failed');
+        // Handle login failure
+    };
 
     return (
         <div className={`homepage ${isDarkTheme ? 'dark' : 'light'}`}>
@@ -69,6 +84,15 @@ const Homepage = () => {
                     </div>
                 </div>
             </section>
+
+            <div className="login-section">
+                <h2>Login</h2>
+                <GoogleLogin
+                    onSuccess={handleGoogleSuccess}
+                    onError={handleGoogleError}
+                    useOneTap
+                />
+            </div>
         </div>
     );
 };
