@@ -59,11 +59,17 @@
 
 .login-form {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .input-group {
     margin-bottom: 1.25rem;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .input-group label {
@@ -79,6 +85,7 @@
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 .login-container.dark .input-group input {
@@ -88,7 +95,7 @@
 }
 
 .login-container.light .input-group input {
-    background: #ffffff;
+    background: #1e1e1e;
     color: #333333;
     border: 1px solid #e0e0e0;
 }
