@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import { auth } from '../firebase/config';
 import { 
@@ -15,29 +16,41 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isSignUp, setIsSignUp] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleEmailPasswordSignIn = async (e) => {
         e.preventDefault();
         setError('');
+        setIsLoading(true);
         
         try {
             if (isSignUp) {
                 // Create new user
                 await createUserWithEmailAndPassword(auth, email, password);
-                alert('Account created successfully!');
-                setIsSignUp(false);
+                setIsLoading(false);
+                // Redirect to dashboard after successful registration
+                navigate('/dashboard');
             } else {
                 // Sign in existing user
                 await signInWithEmailAndPassword(auth, email, password);
-                alert('Logged in successfully!');
+                setIsLoading(false);
+                // Redirect to dashboard after successful login
+                navigate('/dashboard');
             }
         } catch (error) {
+            setIsLoading(false);
             console.error("Error with email/password auth:", error);
-            setError(error.message);
+            setError(error.message.includes("auth/") 
+                ? "Invalid email or password. Please try again." 
+                : error.message);
         }
     };
     
     const handleGoogleSignIn = async () => {
+        setError('');
+        setIsLoading(true);
+        
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
@@ -46,7 +59,7 @@ const Login = () => {
             const user = result.user;
             console.log("Successfully signed in:", user);
             
-            // You can store user info in localStorage or context
+            // Store user info in localStorage
             localStorage.setItem('user', JSON.stringify({
                 displayName: user.displayName,
                 email: user.email,
@@ -54,28 +67,37 @@ const Login = () => {
                 uid: user.uid
             }));
             
-            alert(`Welcome ${user.displayName || user.email}!`);
-            
-            // Redirect to homepage or dashboard
-            // window.location.href = '/';
+            setIsLoading(false);
+            // Redirect to dashboard after successful Google login
+            navigate('/dashboard');
         } catch (error) {
+            setIsLoading(false);
             console.error("Error signing in with Google:", error);
-            setError("Failed to sign in with Google. Please try again.");
+            setError("Google sign-in failed. Please try again later.");
         }
     };
 
     return (
-        <div className="login-container dark">
+        <div className={`login-container ${isDarkTheme ? 'dark' : 'light'}`}>
             <div className="login-card">
-                <h2>{isSignUp ? 'Create Account' : 'Welcome Back'}</h2>
+                <div className="login-header">
+                    <h2>{isSignUp ? 'Create Account' : 'Welcome Back'}</h2>
+                    <p className="login-subtitle">
+                        {isSignUp 
+                            ? 'Sign up to start your learning journey' 
+                            : 'Sign in to continue your learning journey'}
+                    </p>
+                </div>
                 
                 {error && <div className="error-message">{error}</div>}
                 
-                <form onSubmit={handleEmailPasswordSignIn}>
+                <form onSubmit={handleEmailPasswordSignIn} className="login-form">
                     <div className="input-group">
+                        <label htmlFor="email">Email</label>
                         <input
+                            id="email"
                             type="email"
-                            placeholder="Email"
+                            placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
@@ -83,17 +105,23 @@ const Login = () => {
                     </div>
                     
                     <div className="input-group">
+                        <label htmlFor="password">Password</label>
                         <input
+                            id="password"
                             type="password"
-                            placeholder="Password"
+                            placeholder="Enter your password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                     </div>
                     
-                    <button type="submit" className="login-button">
-                        {isSignUp ? 'Sign Up' : 'Login'}
+                    <button 
+                        type="submit" 
+                        className="login-button"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Processing...' : (isSignUp ? 'Sign Up' : 'Login')}
                     </button>
                 </form>
                 
@@ -104,8 +132,9 @@ const Login = () => {
                 <button 
                     onClick={handleGoogleSignIn} 
                     className="google-login-button"
+                    disabled={isLoading}
                 >
-                    <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                    <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                         <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
                         <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
                         <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>

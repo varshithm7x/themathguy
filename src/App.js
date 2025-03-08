@@ -4,6 +4,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Homepage from './components/Homepage';
 import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 import ThemeToggle from './components/ThemeToggle';
 import AboutUs from './components/AboutUs';
 import Help from './components/Help';
@@ -20,6 +21,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/help" element={<Help />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
           <ThemeToggle />
         </div>
