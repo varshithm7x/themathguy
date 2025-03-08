@@ -1,30 +1,53 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useTheme } from '../context/ThemeContext';
 import './Login.css';
+import { auth } from '../firebase/config';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const Login = () => {
-    useEffect(() => {
-        // Create a simple button that opens Google login in a new window
-        const loginButton = document.getElementById('manual-google-login');
-        if (loginButton) {
-            loginButton.addEventListener('click', () => {
-                const clientId = '252083625732-i92gqsrghl2p5sj5oiuoq2g0vn4l597f.apps.googleusercontent.com';
-                const redirectUri = encodeURIComponent(window.location.origin + '/login');
-                const scope = encodeURIComponent('email profile');
-                const responseType = 'token';
-                const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
-                
-                window.open(authUrl, 'Google Login', 'width=500,height=600');
-            });
+    const { isDarkTheme } = useTheme();
+    
+    const handleGoogleSignIn = async () => {
+        try {
+            const provider = new GoogleAuthProvider();
+            const result = await signInWithPopup(auth, provider);
+            
+            // The signed-in user info
+            const user = result.user;
+            console.log("Successfully signed in:", user);
+            
+            // You can store user info in localStorage or context
+            localStorage.setItem('user', JSON.stringify({
+                displayName: user.displayName,
+                email: user.email,
+                photoURL: user.photoURL,
+                uid: user.uid
+            }));
+            
+            alert(`Welcome ${user.displayName}!`);
+            
+            // Redirect to homepage or dashboard
+            // window.location.href = '/';
+        } catch (error) {
+            console.error("Error signing in with Google:", error);
+            alert("Failed to sign in with Google. Please try again.");
         }
-    }, []);
+    };
 
     return (
-        <div className="login-container">
+        <div className={`login-container ${isDarkTheme ? 'dark' : 'light'}`}>
             <div className="login-card">
                 <h2>Login to Your Account</h2>
                 <p>Use your Google account to sign in</p>
                 
-                <button id="manual-google-login" className="google-login-button">
+                <button 
+                    onClick={handleGoogleSignIn} 
+                    className="google-btn"
+                >
+                    <img 
+                        src={isDarkTheme ? "/google-icon-light.png" : "/google-icon-dark.png"} 
+                        alt="Google" 
+                    />
                     Sign in with Google
                 </button>
                 
