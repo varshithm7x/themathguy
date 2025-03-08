@@ -20,7 +20,7 @@ const Homepage = () => {
                             className="hero-logo"
                         />
                     </div>
-                    <h1 className="animate-up">project name</h1>
+                    <h1 className="animate-up">StudyPy</h1>
                     <p className="animate-up delay-1">Math isn't just numbers</p>
                     <p className="animate-up delay-2">it's the key to understanding the universe!</p>
                     <button className="start-btn animate-up delay-3">Start Learning</button>

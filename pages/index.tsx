@@ -1,10 +1,11 @@
+import React from 'react';
 import TextPressure from '../components/TextPressure';
 
 function HomePage() {
   return (
     <div style={{ position: 'relative', height: '300px' }}>
       <TextPressure
-        text="Project Name"
+        text="StudyPy"
         flex={true}
         alpha={false}
         stroke={false}
