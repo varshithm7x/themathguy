@@ -1,0 +1,430 @@
+.profile-container {
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.profile-container.dark {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.profile-container.light {
+    background-color: #f5f5f5;
+    color: #333333;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+}
+
+.profile-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.profile-header p {
+    color: #888;
+    font-size: 1rem;
+}
+
+.profile-content {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem;
+}
+
+.profile-sidebar {
+    flex: 0 0 300px;
+}
+
+.profile-photo-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid #444;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.profile-photo {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+}
+
+.profile-photo-placeholder {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff6b00;
+    color: white;
+    font-size: 72px;
+    font-weight: bold;
+}
+
+.photo-edit-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.profile-photo-container:hover .photo-edit-overlay {
+    opacity: 1;
+}
+
+.profile-photo-container:hover {
+    transform: scale(1.02);
+}
+
+.profile-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.tab-button {
+    padding: 1rem;
+    text-align: left;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-container.dark .tab-button {
+    background-color: #121212;
+    color: #888;
+}
+
+.profile-container.light .tab-button {
+    background-color: #ffffff;
+    color: #666;
+}
+
+.tab-button.active {
+    font-weight: 500;
+}
+
+.profile-container.dark .tab-button.active {
+    background-color: #1e1e1e;
+    color: white;
+    border-left: 3px solid #4a90e2;
+}
+
+.profile-container.light .tab-button.active {
+    background-color: #f0f0f0;
+    color: #000;
+    border-left: 3px solid #4a90e2;
+}
+
+.tab-button:hover:not(.active) {
+    background-color: rgba(128, 128, 128, 0.1);
+}
+
+.profile-form-container {
+    flex: 1;
+    max-width: 700px;
+}
+
+.message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.message.success {
+    background-color: rgba(52, 211, 153, 0.1);
+    color: #34d399;
+}
+
+.message.error {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid;
+}
+
+.profile-container.dark .form-section h2 {
+    border-color: #333;
+}
+
+.profile-container.light .form-section h2 {
+    border-color: #e0e0e0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.profile-container.dark .form-group input,
+.profile-container.dark .form-group textarea {
+    background: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #333;
+}
+
+.profile-container.light .form-group input,
+.profile-container.light .form-group textarea {
+    background: #ffffff;
+    color: #333333;
+    border: 1px solid #e0e0e0;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+}
+
+.profile-container.dark .form-group input:focus,
+.profile-container.dark .form-group textarea:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.profile-container.light .form-group input:focus,
+.profile-container.light .form-group textarea:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.field-note {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.interests-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.interest-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.profile-container.dark .interest-tag {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+}
+
+.profile-container.light .interest-tag {
+    background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
+}
+
+.remove-interest {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
+.profile-container.dark .remove-interest {
+    color: #888;
+}
+
+.profile-container.light .remove-interest {
+    color: #666;
+}
+
+.remove-interest:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.add-interest {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.add-interest input {
+    flex: 1;
+}
+
+.add-interest-btn {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-container.dark .add-interest-btn {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #333;
+}
+
+.profile-container.light .add-interest-btn {
+    background-color: #f0f0f0;
+    color: #333333;
+    border: 1px solid #e0e0e0;
+}
+
+.add-interest-btn:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.save-button,
+.cancel-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.save-button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+}
+
+.save-button:hover {
+    background-color: #3a80d2;
+}
+
+.save-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.cancel-button {
+    background: transparent;
+}
+
+.profile-container.dark .cancel-button {
+    color: #ffffff;
+    border: 1px solid #333;
+}
+
+.profile-container.light .cancel-button {
+    color: #333333;
+    border: 1px solid #e0e0e0;
+}
+
+.cancel-button:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+}
+
+/* Loading state */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .profile-content {
+        flex-direction: column;
+    }
+    
+    .profile-sidebar {
+        flex: none;
+        width: 100%;
+    }
+    
+    .profile-tabs {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .tab-button {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+    }
+    
+    .profile-container.dark .tab-button.active,
+    .profile-container.light .tab-button.active {
+        border-left: none;
+        border-bottom: 3px solid #4a90e2;
+    }
+}
+
+@media (max-width: 600px) {
+    .profile-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .save-button,
+    .cancel-button {
+        width: 100%;
+    }
+} 
