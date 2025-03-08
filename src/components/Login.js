@@ -16,7 +16,9 @@ const Login = () => {
         script.onload = () => {
             window.google.accounts.id.initialize({
                 client_id: '252083625732-i92gqsrghl2p5sj5oiuoq2g0vn4l597f.apps.googleusercontent.com',
-                callback: handleCredentialResponse
+                callback: handleCredentialResponse,
+                ux_mode: 'redirect',
+                redirect_uri: window.location.origin + '/login'
             });
             window.google.accounts.id.renderButton(
                 document.getElementById('google-signin-button'),
