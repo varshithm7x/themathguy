@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import './Homepage.css';
 import { GoogleLogin } from '@react-oauth/google';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 const Homepage = () => {
     const { isDarkTheme } = useTheme();
@@ -12,7 +12,7 @@ const Homepage = () => {
     }, []);
 
     const handleGoogleSuccess = (credentialResponse) => {
-        const decoded = jwt_decode(credentialResponse.credential);
+        const decoded = jwtDecode(credentialResponse.credential);
         console.log(decoded);
         // Handle user login with the decoded information
         // You might want to store this in state or context
